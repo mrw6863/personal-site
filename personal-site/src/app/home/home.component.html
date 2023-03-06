@@ -1,343 +1,47 @@
-<style>
-    :host {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      font-size: 14px;
-      color: #333;
-      box-sizing: border-box;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-  
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin: 8px 0;
-    }
-  
-    p {
-      margin: 0;
-    }
-  
-    .spacer {
-      flex: 1;
-    }
-  
-    .toolbar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      background-color: #3D5467;
-      color: #F1EDEE;
-      font-weight: 600;
-    }
-  
-    .toolbar img {
-      margin: 0 16px;
-    }
-  
-    .toolbar #twitter-logo {
-      height: 40px;
-      margin: 0 8px;
-    }
-  
-    .toolbar #youtube-logo {
-      height: 40px;
-      margin: 0 16px;
-    }
-  
-    .toolbar #twitter-logo:hover,
-    .toolbar #youtube-logo:hover {
-      opacity: 0.8;
-    }
-  
-    .content {
-      display: flex;
-      margin: 82px auto 32px;
-      padding: 0 16px;
-      max-width: 960px;
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    svg.material-icons {
-      height: 24px;
-      width: auto;
-    }
-  
-    svg.material-icons:not(:last-child) {
-      margin-right: 8px;
-    }
-  
-    .card svg.material-icons path {
-      fill: #888;
-    }
-  
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 16px;
-    }
-  
-    .card {
-      all: unset;
-      border-radius: 4px;
-      border: 1px solid #eee;
-      background-color: #fafafa;
-      height: 40px;
-      width: 200px;
-      margin: 0 8px 16px;
-      padding: 16px;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      transition: all 0.2s ease-in-out;
-      line-height: 24px;
-    }
-  
-    .card-container .card:not(:last-child) {
-      margin-right: 0;
-    }
-  
-    .card.card-small {
-      height: 16px;
-      width: 168px;
-    }
-  
-    .card-container .card:not(.highlight-card) {
-      cursor: pointer;
-    }
-  
-    .card-container .card:not(.highlight-card):hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-    }
-  
-    .card-container .card:not(.highlight-card):hover .material-icons path {
-      fill: rgb(105, 103, 103);
-    }
-  
-    .card.highlight-card {
-      background-color: #1976d2;
-      color: white;
-      font-weight: 600;
-      border: none;
-      width: auto;
-      min-width: 30%;
-      position: relative;
-    }
-  
-    .card.card.highlight-card span {
-      margin-left: 60px;
-    }
-  
-    svg#rocket {
-      width: 80px;
-      position: absolute;
-      left: -10px;
-      top: -24px;
-    }
-  
-    svg#rocket-smoke {
-      height: calc(100vh - 95px);
-      position: absolute;
-      top: 10px;
-      right: 180px;
-      z-index: -10;
-    }
-  
-    a,
-    a:visited,
-    a:hover {
-      color: #1976d2;
-      text-decoration: none;
-    }
-  
-    a:hover {
-      color: #125699;
-    }
-  
-    .terminal {
-      position: relative;
-      width: 80%;
-      max-width: 600px;
-      border-radius: 6px;
-      padding-top: 45px;
-      margin-top: 8px;
-      overflow: hidden;
-      background-color: rgb(15, 15, 16);
-    }
-  
-    .terminal::before {
-      content: "\2022 \2022 \2022";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: rgb(58, 58, 58);
-      color: #c2c3c4;
-      width: 100%;
-      font-size: 2rem;
-      line-height: 0;
-      padding: 14px 0;
-      text-indent: 4px;
-    }
-  
-    .terminal pre {
-      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-      color: white;
-      padding: 0 1rem 1rem;
-      margin: 0;
-    }
-  
-    .circle-link {
-      height: 40px;
-      width: 40px;
-      border-radius: 40px;
-      margin: 8px;
-      background-color: white;
-      border: 1px solid #eeeeee;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-      transition: 1s ease-out;
-    }
-  
-    .circle-link:hover {
-      transform: translateY(-0.25rem);
-      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-    }
-  
-    footer {
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      line-height: 20px;
-    }
-  
-    footer a {
-      display: flex;
-      align-items: center;
-    }
-  
-    .github-star-badge {
-      color: #24292e;
-      display: flex;
-      align-items: center;
-      font-size: 12px;
-      padding: 3px 10px;
-      border: 1px solid rgba(27,31,35,.2);
-      border-radius: 3px;
-      background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-      margin-left: 4px;
-      font-weight: 600;
-    }
-  
-    .github-star-badge:hover {
-      background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-      border-color: rgba(27,31,35,.35);
-      background-position: -.5em;
-    }
-  
-    .github-star-badge .material-icons {
-      height: 16px;
-      width: 16px;
-      margin-right: 4px;
-    }
-  
-    svg#clouds {
-      position: fixed;
-      bottom: -160px;
-      left: -230px;
-      z-index: -10;
-      width: 1920px;
-    }
-  
-    /* Responsive Styles */
-    @media screen and (max-width: 767px) {
-      .card-container > *:not(.circle-link) ,
-      .terminal {
-        width: 100%;
-      }
-  
-      .card:not(.highlight-card) {
-        height: 16px;
-        margin: 8px 0;
-      }
-  
-      .card.highlight-card span {
-        margin-left: 72px;
-      }
-  
-      svg#rocket-smoke {
-        right: 120px;
-        transform: rotate(-5deg);
-      }
-    }
-  
-    @media screen and (max-width: 575px) {
-      svg#rocket-smoke {
-        display: none;
-        visibility: hidden;
-      }
-    }
-  </style>
-  
-  <div class="content" role="main">
-  
-    <!-- Resources -->
-    <h2>More on Me</h2>
-    <p>Navigate to one of the below pages for more information on me and what I do</p>
-  
-    <div class="card-container">
-      <a class="card" href="/resume">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="24" height="24" viewBox="0 0 32 32" data-name="Layer 1" id="Layer_1"><rect height="1" width="12" x="10" y="29"/><rect height="1" width="12" x="10" y="2"/><rect height="1" width="4" x="9" y="5"/><rect height="1" width="4" x="9" y="9"/><rect height="1" width="10" x="13" y="12"/><rect height="1" width="3" x="9" y="12"/><rect height="1" width="10" x="13" y="15"/><rect height="1" width="3" x="9" y="15"/><rect height="1" width="10" x="13" y="18"/><rect height="1" width="3" x="9" y="18"/><rect height="1" width="10" x="13" y="21"/><rect height="1" width="3" x="9" y="21"/><rect height="1" width="10" x="13" y="24"/><rect height="1" width="3" x="9" y="24"/><rect height="1" transform="translate(9.5 41.5) rotate(-90)" width="20" x="15.5" y="15.5"/><path d="M22,2V3h2a1,1,0,0,1,1,1V6h1V4a2,2,0,0,0-2-2Z"/><rect height="1" transform="translate(-9.5 22.5) rotate(-90)" width="20" x="-3.5" y="15.5"/><path d="M10,2V3H8A1,1,0,0,0,7,4V6H6V4A2,2,0,0,1,8,2Z"/><path d="M22,30V29h2a1,1,0,0,0,1-1V26h1v2a2,2,0,0,1-2,2Z"/><path d="M10,30V29H8a1,1,0,0,1-1-1V26H6v2a2,2,0,0,0,2,2Z"/><rect height="5" width="1" x="9" y="5"/><rect height="5" width="1" x="12" y="5"/></svg>
-        <span>My Resume</span>
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    
-      </a>
-      <a class="card" href="/projects">
-        <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
-          <g transform="matrix(1.11 0 0 1.11 12 12)" >
-            <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-12, -12)" d="M 5 3 C 3.895 3 3 3.895 3 5 L 3 19 C 3 20.103 3.897 21 5 21 L 19 21 C 20.103 21 21 20.103 21 19 L 21 5 C 21 3.895 20.105 3 19 3 L 5 3 z M 5 5 L 19 5 L 19 7 L 5 7 L 5 5 z M 5 9 L 19 9 L 19 19 L 5 19 L 5 9 z M 10 10.792969 L 6.7929688 14 L 10 17.207031 L 11 16.207031 L 8.7929688 14 L 11 11.792969 L 10 10.792969 z M 14 10.792969 L 13 11.792969 L 15.207031 14 L 13 16.207031 L 14 17.207031 L 17.207031 14 L 14 10.792969 z" stroke-linecap="round" />
-          </g>
-        </svg>
-        <span>My Projects</span>
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    
-      </a>
-      <a class="card" href="/reading">
-        <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
-          <g transform="matrix(0.4 0 0 0.4 12 12)" >
-            <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-25, -26.5)" d="M 5 5 C 2.25 5 0 7.25 0 10 L 0 39 C 0 41.75 2.25 44 5 44 L 21 44 C 22.664063 44 24 45.351563 24 47 C 24 47.308594 24.144531 47.601563 24.386719 47.789063 C 24.632813 47.980469 24.949219 48.046875 25.25 47.96875 C 25.511719 47.902344 25.738281 47.734375 25.875 47.5 C 25.960938 47.347656 26.003906 47.175781 26 47 C 26 45.351563 27.335938 44 29 44 L 45 44 C 47.75 44 50 41.75 50 39 L 50 10 C 50 7.25 47.75 5 45 5 L 29 5 C 27.367188 5 25.914063 5.8125 25 7.03125 C 24.085938 5.8125 22.632813 5 21 5 Z M 5 7 L 21 7 C 22.667969 7 24 8.332031 24 10 L 24 43.125 C 23.152344 42.464844 22.148438 42 21 42 L 5 42 C 3.332031 42 2 40.667969 2 39 L 2 10 C 2 8.332031 3.332031 7 5 7 Z M 29 7 L 45 7 C 46.667969 7 48 8.332031 48 10 L 48 39 C 48 40.667969 46.667969 42 45 42 L 29 42 C 27.851563 42 26.847656 42.464844 26 43.125 L 26 10 C 26 8.332031 27.332031 7 29 7 Z" stroke-linecap="round" />
-          </g>
-        </svg>
-        <span>What I'm Reading</span>
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    
-      </a>
-      <a class="card" href="/writing">
-        <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
-          <g transform="matrix(0.45 0 0 0.45 12 12)" >
-            <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-24.84, -22.22)" d="M 26.273438 4.445313 C 26.148438 4.457031 26.027344 4.476563 25.902344 4.5 C 24.902344 4.699219 23.800781 5.5 22.800781 6.5 L 27.597656 9.5 C 28.199219 7.5 28.601563 5.5 27.300781 4.699219 C 27 4.472656 26.644531 4.417969 26.273438 4.445313 Z M 21.402344 8 C 20.886719 8.640625 20.066406 9.707031 19.117188 10.988281 L 9.199219 12.800781 C 8.597656 12.902344 8 13.398438 7.699219 14 L 3 25.5 C 2.800781 26.101563 2.597656 26.699219 2.699219 27.300781 C 2.898438 29.5 4.800781 31.199219 7 31 C 7.46875 30.953125 7.933594 30.855469 8.382813 30.691406 L 13 33.597656 C 13.644531 32.714844 14.925781 30.941406 16.214844 29.179688 C 18.890625 30.558594 25.699219 34 25.699219 34 C 27.898438 35.199219 30.5 35.402344 32.902344 34.902344 L 40.800781 33.199219 L 41.199219 36.097656 L 47 35.300781 L 44.402344 17.699219 L 38.597656 18.5 L 38.699219 19.300781 L 28.199219 12.699219 C 27.785156 12.46875 27.277344 12.15625 26.761719 11.890625 C 26.800781 11.808594 26.867188 11.675781 26.902344 11.597656 Z M 21.902344 10.800781 L 24.300781 12.300781 C 23.300781 14.300781 21.800781 17.199219 19.902344 20.300781 L 19.390625 21.183594 L 17.097656 20.597656 C 16.390625 20.488281 15.695313 20.570313 15.066406 20.8125 C 15.511719 20.0625 15.957031 19.3125 16.402344 18.597656 C 18.402344 15.398438 20.402344 12.601563 21.902344 10.800781 Z M 17.410156 13.367188 C 16.546875 14.601563 15.640625 15.921875 14.699219 17.402344 C 12.539063 20.953125 10.488281 24.792969 8.960938 27.65625 C 8.644531 28.246094 7.96875 28.902344 7 29 C 6.101563 29.101563 5.101563 28.5 4.800781 27.597656 C 4.601563 27.097656 4.699219 26.597656 4.898438 26.199219 L 9.300781 15.300781 C 9.402344 15 9.699219 14.800781 10 14.699219 Z M 25.847656 13.789063 C 26.371094 14.054688 26.914063 14.359375 27.199219 14.5 L 38.300781 21.5 L 39 21.5 L 40.402344 31.199219 L 32.402344 32.902344 C 30.402344 33.300781 28.300781 33.097656 26.5 32.199219 L 15.597656 26.699219 C 14.597656 26.199219 14.097656 25.101563 14.597656 24 C 15 23 16 22.5 17 22.699219 L 25.097656 24.699219 L 28.199219 20.199219 L 26.402344 19.097656 L 24.199219 22.402344 L 21.457031 21.703125 C 23.324219 18.652344 24.828125 15.839844 25.847656 13.789063 Z M 42.699219 20 L 44.699219 33.597656 L 42.902344 33.902344 L 40.902344 20.199219 Z M 12.5 25.296875 C 12.582031 25.738281 12.707031 26.175781 12.902344 26.597656 C 13.300781 27.398438 13.902344 27.898438 14.300781 28.199219 C 14.300781 28.199219 14.457031 28.28125 14.464844 28.28125 L 12.5 30.902344 L 10.199219 29.5 C 10.816406 28.351563 11.648438 26.828125 12.5 25.296875 Z M 6.898438 32.097656 C 5.800781 35.199219 5.800781 37.199219 5.800781 38 L 5.101563 39 C 4.898438 39.300781 5 39.699219 5.300781 39.902344 C 5.5 40 5.601563 40 5.800781 40 C 6 39.898438 6.101563 39.800781 6.300781 39.699219 L 6.898438 38.699219 C 7.601563 38.398438 9.398438 37.5 11.699219 35.097656 Z" stroke-linecap="round" />
-          </g>
-        </svg>
-        <span>Things I've Written</span>
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    
-      </a>
-    </div>
-  
-    <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
-      <title>Gray Clouds Background</title>
-      <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
-    </svg>
-  
+<div class="content" role="main">
+
+  <!-- Resources -->
+  <h2>More on Me</h2>
+  <p>Navigate to one of the below pages for more information on me and what I do</p>
+
+  <div class="card-container">
+    <a class="card" href="/resume">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="24" height="24" viewBox="0 0 32 32" data-name="Layer 1" id="Layer_1"><rect height="1" width="12" x="10" y="29"/><rect height="1" width="12" x="10" y="2"/><rect height="1" width="4" x="9" y="5"/><rect height="1" width="4" x="9" y="9"/><rect height="1" width="10" x="13" y="12"/><rect height="1" width="3" x="9" y="12"/><rect height="1" width="10" x="13" y="15"/><rect height="1" width="3" x="9" y="15"/><rect height="1" width="10" x="13" y="18"/><rect height="1" width="3" x="9" y="18"/><rect height="1" width="10" x="13" y="21"/><rect height="1" width="3" x="9" y="21"/><rect height="1" width="10" x="13" y="24"/><rect height="1" width="3" x="9" y="24"/><rect height="1" transform="translate(9.5 41.5) rotate(-90)" width="20" x="15.5" y="15.5"/><path d="M22,2V3h2a1,1,0,0,1,1,1V6h1V4a2,2,0,0,0-2-2Z"/><rect height="1" transform="translate(-9.5 22.5) rotate(-90)" width="20" x="-3.5" y="15.5"/><path d="M10,2V3H8A1,1,0,0,0,7,4V6H6V4A2,2,0,0,1,8,2Z"/><path d="M22,30V29h2a1,1,0,0,0,1-1V26h1v2a2,2,0,0,1-2,2Z"/><path d="M10,30V29H8a1,1,0,0,1-1-1V26H6v2a2,2,0,0,0,2,2Z"/><rect height="5" width="1" x="9" y="5"/><rect height="5" width="1" x="12" y="5"/></svg>
+      <span>My Resume</span>
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    
+    </a>
+    <a class="card" href="/projects">
+      <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+        <g transform="matrix(1.11 0 0 1.11 12 12)" >
+          <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-12, -12)" d="M 5 3 C 3.895 3 3 3.895 3 5 L 3 19 C 3 20.103 3.897 21 5 21 L 19 21 C 20.103 21 21 20.103 21 19 L 21 5 C 21 3.895 20.105 3 19 3 L 5 3 z M 5 5 L 19 5 L 19 7 L 5 7 L 5 5 z M 5 9 L 19 9 L 19 19 L 5 19 L 5 9 z M 10 10.792969 L 6.7929688 14 L 10 17.207031 L 11 16.207031 L 8.7929688 14 L 11 11.792969 L 10 10.792969 z M 14 10.792969 L 13 11.792969 L 15.207031 14 L 13 16.207031 L 14 17.207031 L 17.207031 14 L 14 10.792969 z" stroke-linecap="round" />
+        </g>
+      </svg>
+      <span>My Projects</span>
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    
+    </a>
+    <a class="card" href="/reading">
+      <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+        <g transform="matrix(0.4 0 0 0.4 12 12)" >
+          <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-25, -26.5)" d="M 5 5 C 2.25 5 0 7.25 0 10 L 0 39 C 0 41.75 2.25 44 5 44 L 21 44 C 22.664063 44 24 45.351563 24 47 C 24 47.308594 24.144531 47.601563 24.386719 47.789063 C 24.632813 47.980469 24.949219 48.046875 25.25 47.96875 C 25.511719 47.902344 25.738281 47.734375 25.875 47.5 C 25.960938 47.347656 26.003906 47.175781 26 47 C 26 45.351563 27.335938 44 29 44 L 45 44 C 47.75 44 50 41.75 50 39 L 50 10 C 50 7.25 47.75 5 45 5 L 29 5 C 27.367188 5 25.914063 5.8125 25 7.03125 C 24.085938 5.8125 22.632813 5 21 5 Z M 5 7 L 21 7 C 22.667969 7 24 8.332031 24 10 L 24 43.125 C 23.152344 42.464844 22.148438 42 21 42 L 5 42 C 3.332031 42 2 40.667969 2 39 L 2 10 C 2 8.332031 3.332031 7 5 7 Z M 29 7 L 45 7 C 46.667969 7 48 8.332031 48 10 L 48 39 C 48 40.667969 46.667969 42 45 42 L 29 42 C 27.851563 42 26.847656 42.464844 26 43.125 L 26 10 C 26 8.332031 27.332031 7 29 7 Z" stroke-linecap="round" />
+        </g>
+      </svg>
+      <span>What I'm Reading</span>
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    
+    </a>
+    <a class="card" href="/writing">
+      <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+        <g transform="matrix(0.45 0 0 0.45 12 12)" >
+          <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-24.84, -22.22)" d="M 26.273438 4.445313 C 26.148438 4.457031 26.027344 4.476563 25.902344 4.5 C 24.902344 4.699219 23.800781 5.5 22.800781 6.5 L 27.597656 9.5 C 28.199219 7.5 28.601563 5.5 27.300781 4.699219 C 27 4.472656 26.644531 4.417969 26.273438 4.445313 Z M 21.402344 8 C 20.886719 8.640625 20.066406 9.707031 19.117188 10.988281 L 9.199219 12.800781 C 8.597656 12.902344 8 13.398438 7.699219 14 L 3 25.5 C 2.800781 26.101563 2.597656 26.699219 2.699219 27.300781 C 2.898438 29.5 4.800781 31.199219 7 31 C 7.46875 30.953125 7.933594 30.855469 8.382813 30.691406 L 13 33.597656 C 13.644531 32.714844 14.925781 30.941406 16.214844 29.179688 C 18.890625 30.558594 25.699219 34 25.699219 34 C 27.898438 35.199219 30.5 35.402344 32.902344 34.902344 L 40.800781 33.199219 L 41.199219 36.097656 L 47 35.300781 L 44.402344 17.699219 L 38.597656 18.5 L 38.699219 19.300781 L 28.199219 12.699219 C 27.785156 12.46875 27.277344 12.15625 26.761719 11.890625 C 26.800781 11.808594 26.867188 11.675781 26.902344 11.597656 Z M 21.902344 10.800781 L 24.300781 12.300781 C 23.300781 14.300781 21.800781 17.199219 19.902344 20.300781 L 19.390625 21.183594 L 17.097656 20.597656 C 16.390625 20.488281 15.695313 20.570313 15.066406 20.8125 C 15.511719 20.0625 15.957031 19.3125 16.402344 18.597656 C 18.402344 15.398438 20.402344 12.601563 21.902344 10.800781 Z M 17.410156 13.367188 C 16.546875 14.601563 15.640625 15.921875 14.699219 17.402344 C 12.539063 20.953125 10.488281 24.792969 8.960938 27.65625 C 8.644531 28.246094 7.96875 28.902344 7 29 C 6.101563 29.101563 5.101563 28.5 4.800781 27.597656 C 4.601563 27.097656 4.699219 26.597656 4.898438 26.199219 L 9.300781 15.300781 C 9.402344 15 9.699219 14.800781 10 14.699219 Z M 25.847656 13.789063 C 26.371094 14.054688 26.914063 14.359375 27.199219 14.5 L 38.300781 21.5 L 39 21.5 L 40.402344 31.199219 L 32.402344 32.902344 C 30.402344 33.300781 28.300781 33.097656 26.5 32.199219 L 15.597656 26.699219 C 14.597656 26.199219 14.097656 25.101563 14.597656 24 C 15 23 16 22.5 17 22.699219 L 25.097656 24.699219 L 28.199219 20.199219 L 26.402344 19.097656 L 24.199219 22.402344 L 21.457031 21.703125 C 23.324219 18.652344 24.828125 15.839844 25.847656 13.789063 Z M 42.699219 20 L 44.699219 33.597656 L 42.902344 33.902344 L 40.902344 20.199219 Z M 12.5 25.296875 C 12.582031 25.738281 12.707031 26.175781 12.902344 26.597656 C 13.300781 27.398438 13.902344 27.898438 14.300781 28.199219 C 14.300781 28.199219 14.457031 28.28125 14.464844 28.28125 L 12.5 30.902344 L 10.199219 29.5 C 10.816406 28.351563 11.648438 26.828125 12.5 25.296875 Z M 6.898438 32.097656 C 5.800781 35.199219 5.800781 37.199219 5.800781 38 L 5.101563 39 C 4.898438 39.300781 5 39.699219 5.300781 39.902344 C 5.5 40 5.601563 40 5.800781 40 C 6 39.898438 6.101563 39.800781 6.300781 39.699219 L 6.898438 38.699219 C 7.601563 38.398438 9.398438 37.5 11.699219 35.097656 Z" stroke-linecap="round" />
+        </g>
+      </svg>
+      <span>Things I've Written</span>
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    
+    </a>
   </div>
-  
+
+  <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
+    <title>Gray Clouds Background</title>
+    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
+  </svg>
+
+</div>
