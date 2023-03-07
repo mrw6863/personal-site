@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { AntiCopyPasterComponent } from './projects/anticopypaster/anticopypaster.component';
+import { BookFinderComponent } from './projects/bookfinder/bookfinder.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ReadingComponent } from './reading/reading.component';
 import { ResumeComponent } from './resume/resume.component';
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'resume', component: ResumeComponent },
   { path: 'projects', component: ProjectsComponent },
+  { path: 'bookfinder', component: BookFinderComponent },
+  { path: 'anticopypaster', component: AntiCopyPasterComponent },
   { path: 'reading', component: ReadingComponent },
   { path: 'writing', component: WritingComponent },
   { path: 'dangerous-texts', component: DangerousTextsComponent },
