@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "Resume",
         "Projects",
-        "Writing"
+        "Writing",
+        "Reading"
     ]
 }
