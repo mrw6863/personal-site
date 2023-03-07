@@ -9,6 +9,8 @@ import { ReadingComponent } from './reading/reading.component';
 import { ResumeComponent } from './resume/resume.component';
 import { BlogComponent } from './writing/blog/blog.component';
 import { DangerousTextsComponent } from './writing/dangerous-texts/dangerous-texts.component';
+import { InvitationToABeheadingComponent } from './writing/dangerous-texts/invitation-to-a-beheading/invitation-to-a-beheading.component';
+import { LolitaComponent } from './writing/dangerous-texts/lolita/lolita.component';
 import { FilmCritiquesComponent } from './writing/film-critiques/film-critiques.component';
 import { WritingComponent } from './writing/writing.component';
 
@@ -20,7 +22,9 @@ const routes: Routes = [
   { path: 'anticopypaster', component: AntiCopyPasterComponent },
   { path: 'reading', component: ReadingComponent },
   { path: 'writing', component: WritingComponent },
-  { path: 'dangerous-texts', component: DangerousTextsComponent },
+  { path: 'writing/dangerous-texts', component: DangerousTextsComponent },
+  { path: 'writing/dangerous-texts/invitation-to-a-beheading', component: InvitationToABeheadingComponent },
+  { path: 'writing/dangerous-texts/lolita', component: LolitaComponent },
   { path: 'film-critiques', component: FilmCritiquesComponent },
   { path: 'blog', component: BlogComponent }
 ];

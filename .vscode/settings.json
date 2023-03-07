@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "Resume",
-        "Projects"
+        "Projects",
+        "Writing"
     ]
 }
