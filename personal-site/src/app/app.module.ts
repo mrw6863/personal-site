@@ -6,10 +6,13 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { BasicTextPageComponent } from './components/basic-text-page/basic-text-page.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BasicTextPageComponent
   ],
   imports: [
     BrowserModule,

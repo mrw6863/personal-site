@@ -1,7 +1,6 @@
 <div>
-    <input type="file" (change)="onFileSelected($event)">
     <div *ngIf="fileContent" class="file-content">
-      <div [innerHTML]="fileContent | markdown"></div>
+      <div [innerHTML]="fileContent"></div>
     </div>
   </div>
   

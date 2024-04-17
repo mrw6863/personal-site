@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./basic-text-page.component.css']
 })
 export class BasicTextPageComponent {
+  @Input() filePath: string = '';
   fileContent: string = '';
 
   constructor(private http: HttpClient) {}
@@ -16,7 +17,7 @@ export class BasicTextPageComponent {
   }
 
   loadFileContent() {
-    this.http.get('assets/content.md', { responseType: 'text' })
+    this.http.get(this.filePath, { responseType: 'text' })
       .subscribe(
         data => {
           this.fileContent = data;
@@ -26,4 +27,5 @@ export class BasicTextPageComponent {
         }
       );
   }
+
 }
